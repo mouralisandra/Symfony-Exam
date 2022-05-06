@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<table class="table">
+    <tr class="table-active">
+        <td>Name</td>
+        <td>firstname</td>
+        <td>Section</td>
+    </tr>
+    {% for Etudiant in Etudiants %}
+    <tr class="table-{% if loop.index is odd %}danger{% else %}warning{% endif %}">
+        <td>{{ Etudiant.getNom() }}</td>
+        <td>{{ Etudiant.getPrenom() }}</td>
+     <td>{{Etudiant.getReference(Section)}}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+{% e
