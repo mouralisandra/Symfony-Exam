@@ -16,9 +16,9 @@ class Section
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $designation;
+    private $Designation;
 
-    #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Etudiant::class)]
+    #[ORM\OneToMany(mappedBy: 'Section', targetEntity: Etudiant::class)]
     private $etudiants;
 
     public function __construct()
@@ -33,12 +33,12 @@ class Section
 
     public function getDesignation(): ?string
     {
-        return $this->designation;
+        return $this->Designation;
     }
 
-    public function setDesignation(string $designation): self
+    public function setDesignation(string $Designation): self
     {
-        $this->designation = $designation;
+        $this->Designation = $Designation;
 
         return $this;
     }
@@ -55,7 +55,7 @@ class Section
     {
         if (!$this->etudiants->contains($etudiant)) {
             $this->etudiants[] = $etudiant;
-            $etudiant->setRelation($this);
+            $etudiant->setSection($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Section
     {
         if ($this->etudiants->removeElement($etudiant)) {
             // set the owning side to null (unless already changed)
-            if ($etudiant->getRelation() === $this) {
-                $etudiant->setRelation(null);
+            if ($etudiant->getSection() === $this) {
+                $etudiant->setSection(null);
             }
         }
 
@@ -74,6 +74,6 @@ class Section
     }
     public function __toString()
     {
-        return $this->designation;
+        return $this->Designation;
     }
 }

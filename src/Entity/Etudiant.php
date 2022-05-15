@@ -14,13 +14,14 @@ class Etudiant
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $nom;
+    private $Nom;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $prenom;
+    private $Prenom;
 
-    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'etudiants')]
-    private $relation;
+    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'Etudiant')]
+    #[ORM\JoinColumn(nullable: true)]
+    private $Section;
 
     public function getId(): ?int
     {
@@ -29,41 +30,37 @@ class Etudiant
 
     public function getNom(): ?string
     {
-        return $this->nom;
+        return $this->Nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(string $Nom): self
     {
-        $this->nom = $nom;
+        $this->Nom = $Nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->prenom;
+        return $this->Prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(string $Prenom): self
     {
-        $this->prenom = $prenom;
+        $this->Prenom = $Prenom;
 
         return $this;
     }
 
-    public function getRelation(): ?Section
+    public function getSection(): ?Section
     {
-        return $this->relation;
+        return $this->Section;
     }
 
-    public function setRelation(?Section $relation): self
+    public function setSection(?Section $Section): self
     {
-        $this->relation = $relation;
+        $this->Section = $Section;
 
         return $this;
-    }
-    public function __toString()
-    {
-        return $this->nom;
     }
 }

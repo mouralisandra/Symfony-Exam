@@ -6,14 +6,26 @@
         <td>Name</td>
         <td>firstname</td>
         <td>Section</td>
+        <td>Action</td>
     </tr>
     {% for Etudiant in Etudiants %}
     <tr class="table-{% if loop.index is odd %}danger{% else %}warning{% endif %}">
         <td>{{ Etudiant.getNom() }}</td>
         <td>{{ Etudiant.getPrenom() }}</td>
-     <td>{{Etudiant.getReference(Section)}}</td>
-
+        <td>{% if Etudiant.Section %}
+        {{Etudiant.Section.Designation}}
+        {% else %}
+        <p>Etudiant non encore affecté à une section</p>
+        {% endif %}</td>
+        <td>
+          <a href="{{path("ajout",{id:Etudiant.id})}}">Modifier</a>
+          <a href="{{path("delete",{id:Etudiant.id})}}">Supprimer</a>
+      </td>
     </tr>
+        <script src="{{ asset('/assets/js/script.js') }}"></script>
     {% endfor %}
+
 </table>
-{% e
+
+{% endblock %}
+
